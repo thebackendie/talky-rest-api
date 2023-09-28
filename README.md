@@ -5,7 +5,7 @@ Build a Blog API that can be used to manage posts and comments as well as go thr
 
 ## Tech Stack
 
-**Server:** Node, Express, MongoDB, Mongoose, JWT
+**Server:** Node, Express, MySql, Sequelize, JWT
 
 # API FEATURES
 
