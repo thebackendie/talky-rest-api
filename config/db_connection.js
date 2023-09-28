@@ -2,7 +2,7 @@ const {ProductionConfig, DevConfig, StagingConfig} = require('../config/configur
 const Sequelize = require('sequelize');
 
 const dotenv = require('dotenv');
-dotenv.config({ path: '../config/.env' });
+dotenv.config({ path: './config/.env' });
 
 let db_host = undefined;
 let db_user = undefined;
@@ -34,7 +34,6 @@ switch (process.env.NODE_ENV) {
         break;
 }
 
-console.log(db_host, db_password, db_name, db_user);
 
 // Setting Database Connection
 const sequelize = new Sequelize(db_name, db_user, db_password, {
