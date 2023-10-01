@@ -3,9 +3,9 @@ const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../../config/db_connection').sequelize;
 const bcrypt = require('bcrypt');
 
-class User extends Model {}
+class Users extends Model {}
 
-User.init({
+Users.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -16,15 +16,7 @@ User.init({
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    middle_name: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-    },
     last_name: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-    },
-    mobile_no: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
@@ -38,25 +30,14 @@ User.init({
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    address: {
-        type: DataTypes.STRING(255),
+    profile_picture: {
+        type: DataTypes.TEXT,
         allowNull: false,
     },
-    city: {
-        type: DataTypes.STRING(255),
+    role: {
+        type: DataTypes.ENUM('user', 'admin'),
         allowNull: false,
-    },
-    state: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-    },
-    zip_code: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-    },
-    resume: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+        defaultValue: 'user'
     },
     status: {
         type: DataTypes.ENUM('active', 'inactive'),
@@ -79,19 +60,19 @@ User.init({
     }
 }, {
     sequelize, // We need to pass the connection instance
-    modelName: 'User', // We need to choose the model name
+    modelName: 'Users', // We need to choose the model name
     tableName: 'users'
 });
 
 // Add password comparison method
-User.prototype.comparePassword = async function (candidatePassword, userPassword) {
+Users.prototype.comparePassword = async function (candidatePassword, userPassword) {
     return bcrypt.compare(candidatePassword, userPassword);
 };
 
 // Hook to hash the password before saving
-User.beforeCreate(async (user) => {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    user.password = hashedPassword;
+Users.beforeCreate(async (users) => {
+    const hashedPassword = await bcrypt.hash(users.password, 10);
+    users.password = hashedPassword;
 });
 
-module.exports = User;
+module.exports = Users;
