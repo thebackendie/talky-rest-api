@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 
 // Uncaught Exceptions
@@ -22,6 +23,9 @@ app.use(morgan('dev'));
 // Parsing JSON
 app.use(bodyParser.json({ limit: '50kb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Parsing Cookies
+app.use(cookieParser());
 
 const port = process.env.PORT || 4000;
 
