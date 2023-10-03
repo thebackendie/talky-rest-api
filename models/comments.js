@@ -1,21 +1,21 @@
 const {DataTypes, Model} = require('sequelize');
-const Users = require("./users");
 
-const sequelize = require('../../config/db_connection').sequelize;
+const sequelize = require('../config/db_connection').sequelize;
 
-const Users = require('../v1/users');
+const Users = require('./users');
+const Posts = require('./posts');
 
-class Categories extends Model {}
+class Comments extends Model {}
 
-Categories.init({
+Comments.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
-        type: DataTypes.STRING(255),
+    comments: {
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     author: {
@@ -24,7 +24,15 @@ Categories.init({
         references: {
             model: Users,
             key: 'id'
-        },
+        }
+    },
+    post: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Posts,
+            key: 'id'
+        }
     },
     createdAt: {
         type: DataTypes.DATE,
@@ -35,9 +43,10 @@ Categories.init({
         type: DataTypes.DATE,
         allowNull: false,
     }
-
 }, {
     sequelize,
-    modelName: 'Categories',
-    tableName: 'categories'
+    modelName: 'Comments',
+    tableName: 'comments'
 });
+
+module.exports = Comments;
