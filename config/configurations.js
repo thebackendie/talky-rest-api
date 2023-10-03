@@ -47,4 +47,4 @@ const config_object = {
     'production': ProductionConfig
 }
 
-module.exports = {DevConfig, StagingConfig, ProductionConfig, config_object}
+module.exports = {Configurations, DevConfig, StagingConfig, ProductionConfig, config_object}
