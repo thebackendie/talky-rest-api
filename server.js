@@ -27,6 +27,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Parsing Cookies
 app.use(cookieParser());
 
+// Routers
+const {router} = require('./routes/routes');
+
+// Routes
+app.use('/api/', router);
+
+// Error Handling
+const { notFound, errorHandler } = require('./middlewares/errorHandler');
+
+app.use(notFound);
+app.use(errorHandler);
+
 const port = process.env.PORT || 4000;
 
 const sequelize = require('./config/db_connection').sequelize;

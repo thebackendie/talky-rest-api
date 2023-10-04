@@ -2,7 +2,7 @@ const {DataTypes, Model} = require('sequelize');
 
 const sequelize = require('../config/db_connection').sequelize;
 
-const Users = require('users');
+const Users = require('./users');
 
 class Tokens extends Model {}
 

@@ -24,7 +24,7 @@ exports.signUp = asyncHandler( async (req, res, next) => {
     const {email} = req.body;
 
     // check if user exists
-    const user = await Users.findOne({ where: email });
+    const user = await Users.findAll({ where: email });
     if (!user){
         try {
             const newUser = await Users.create(req.body);
